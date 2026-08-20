@@ -4,6 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Daily Issued Vaccine Sheet - EPI Civil Hospital Naushahro Feroze</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="EPI Sheet">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="manifest" href='data:application/manifest+json,{
+        "name": "EPI Daily Issued Vaccine Sheet",
+        "short_name": "EPI Sheet",
+        "start_url": ".",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#0f4c81",
+        "icons": [
+            {
+                "src": "logo.png",
+                "sizes": "192x192",
+                "type": "image/png"
+            },
+            {
+                "src": "logo.png",
+                "sizes": "512x512",
+                "type": "image/png"
+            }
+        ]
+    }'>
+
     <style>
         * {
             box-sizing: border-box;
@@ -375,7 +403,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Stock Row -->
                 <tr class="stock-row">
                     <td class="row-title">STOCK BOOK / REFRIGERATOR</td>
                     <td data-label="BCG"><input type="number" class="stock-input" data-col="0" value="0"></td>
@@ -392,7 +419,6 @@
                     <td data-label="HPV"><input type="number" class="stock-input" data-col="11" value="0"></td>
                 </tr>
 
-                <!-- Issue Row 1 -->
                 <tr>
                     <td class="row-title">FIX-POINT</td>
                     <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
@@ -409,7 +435,6 @@
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
-                <!-- Issue Row 2 -->
                 <tr>
                     <td class="row-title">IMRAN ABBASI</td>
                     <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
@@ -426,7 +451,6 @@
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
-                <!-- Issue Row 3 -->
                 <tr>
                     <td class="row-title">AIJAZ HUSSAIN MEMON</td>
                     <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
@@ -443,7 +467,6 @@
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
-                <!-- Remaining Balance Row -->
                 <tr class="remaining-row">
                     <td class="row-title">REMAINING BALANCE</td>
                     <td data-label="BCG"><span class="remaining-val" data-col="0">0</span></td>
