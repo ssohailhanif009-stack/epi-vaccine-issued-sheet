@@ -77,9 +77,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            position: relative;
         }
 
-        .meta-bar input[type="date"] {
+        .meta-bar input[type="text"] {
             padding: 6px 10px;
             border: 1px solid #cbd5e0;
             border-radius: 6px;
@@ -88,6 +89,18 @@
             color: #2d3748;
             background-color: #ffffff;
             font-weight: 600;
+            width: 120px;
+            text-align: center;
+        }
+
+        .meta-bar input[type="date"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
         }
 
         .table-wrapper {
@@ -333,8 +346,9 @@
 
     <div class="meta-bar">
         <div class="date-picker-wrapper">
-            <label for="sheet-date">DATE: </label>
-            <input type="date" id="sheet-date">
+            <label for="sheet-date-display">DATE: </label>
+            <input type="text" id="sheet-date-display" placeholder="DD-MM-YYYY" readonly>
+            <input type="date" id="sheet-date-picker">
         </div>
         <div style="font-size: 12px; color: #4a5568; font-weight: 600;">
             <span>EPI Stock Management System</span>
@@ -457,6 +471,26 @@
 <script>
     const STORAGE_KEY = 'epi_vaccine_sheet_data';
 
+    // Helper: Convert YYYY-MM-DD to DD-MM-YYYY
+    function formatToDDMMYYYY(yyyyMmDd) {
+        if (!yyyyMmDd) return '';
+        const parts = yyyyMmDd.split('-');
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return yyyyMmDd;
+    }
+
+    // Helper: Convert DD-MM-YYYY to YYYY-MM-DD
+    function formatToYYYYMMDD(ddMmYyyy) {
+        if (!ddMmYyyy) return '';
+        const parts = ddMmYyyy.split('-');
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return ddMmYyyy;
+    }
+
     // Calculate remaining balance for all columns
     function calculateTotals() {
         for (let col = 0; col < 12; col++) {
@@ -485,7 +519,7 @@
     // Save inputs to localStorage
     function saveData() {
         const data = {
-            date: document.getElementById('sheet-date').value,
+            date: document.getElementById('sheet-date-display').value,
             inputs: []
         };
 
@@ -504,7 +538,8 @@
             try {
                 const data = JSON.parse(saved);
                 if (data.date) {
-                    document.getElementById('sheet-date').value = data.date;
+                    document.getElementById('sheet-date-display').value = data.date;
+                    document.getElementById('sheet-date-picker').value = formatToYYYYMMDD(data.date);
                 } else {
                     setDefaultDate();
                 }
@@ -533,7 +568,9 @@
         const yyyy = today.getFullYear();
         const mm = String(today.getMonth() + 1).padStart(2, '0');
         const dd = String(today.getDate()).padStart(2, '0');
-        document.getElementById('sheet-date').value = `${yyyy}-${mm}-${dd}`;
+        
+        document.getElementById('sheet-date-picker').value = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('sheet-date-display').value = `${dd}-${mm}-${yyyy}`;
     }
 
     // Clear data & remove permanent LocalStorage
@@ -576,7 +613,12 @@
             });
         });
 
-        document.getElementById('sheet-date').addEventListener('change', saveData);
+        // Date Picker Change Event
+        document.getElementById('sheet-date-picker').addEventListener('change', function() {
+            const formattedDate = formatToDDMMYYYY(this.value);
+            document.getElementById('sheet-date-display').value = formattedDate;
+            saveData();
+        });
     });
 </script>
 
