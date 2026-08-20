@@ -224,6 +224,7 @@
             background-color: #c53030;
         }
 
+        /* Mobile Vertical Responsive View */
         @media (max-width: 600px) {
             body {
                 padding: 5px;
@@ -248,6 +249,76 @@
             }
             .btn {
                 max-width: 100%;
+            }
+
+            /* Table Vertical Layout */
+            .table-wrapper {
+                border: none;
+                box-shadow: none;
+                overflow-x: visible;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            tbody tr {
+                border: 1px solid #cbd5e0;
+                border-radius: 8px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                overflow: hidden;
+            }
+
+            tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 12px;
+                text-align: right;
+                border: none;
+                border-bottom: 1px solid #edf2f7;
+            }
+
+            tbody td:last-child {
+                border-bottom: none;
+            }
+
+            tbody td.row-title {
+                position: static;
+                width: 100%;
+                background-color: #0f4c81 !important;
+                color: #ffffff !important;
+                font-size: 14px;
+                padding: 10px 12px;
+                box-shadow: none;
+            }
+
+            tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: #4a5568;
+                text-align: left;
+                padding-right: 10px;
+                font-size: 12px;
+            }
+
+            input[type="number"] {
+                width: 90px;
+                text-align: right;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -293,86 +364,86 @@
                 <!-- Stock Row -->
                 <tr class="stock-row">
                     <td class="row-title">STOCK BOOK / REFRIGERATOR</td>
-                    <td><input type="number" class="stock-input" data-col="0" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="1" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="2" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="3" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="4" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="5" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="6" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="7" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="8" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="9" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="10" value="0"></td>
-                    <td><input type="number" class="stock-input" data-col="11" value="0"></td>
+                    <td data-label="BCG"><input type="number" class="stock-input" data-col="0" value="0"></td>
+                    <td data-label="HEP-B"><input type="number" class="stock-input" data-col="1" value="0"></td>
+                    <td data-label="OPV"><input type="number" class="stock-input" data-col="2" value="0"></td>
+                    <td data-label="Penta"><input type="number" class="stock-input" data-col="3" value="0"></td>
+                    <td data-label="Panadol"><input type="number" class="stock-input" data-col="4" value="0"></td>
+                    <td data-label="PCV-13"><input type="number" class="stock-input" data-col="5" value="0"></td>
+                    <td data-label="Rota"><input type="number" class="stock-input" data-col="6" value="0"></td>
+                    <td data-label="IPV"><input type="number" class="stock-input" data-col="7" value="0"></td>
+                    <td data-label="MR"><input type="number" class="stock-input" data-col="8" value="0"></td>
+                    <td data-label="TCV"><input type="number" class="stock-input" data-col="9" value="0"></td>
+                    <td data-label="TD"><input type="number" class="stock-input" data-col="10" value="0"></td>
+                    <td data-label="HPV"><input type="number" class="stock-input" data-col="11" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 1 -->
                 <tr>
                     <td class="row-title">FIX-POINT</td>
-                    <td><input type="number" class="issue-input" data-col="0" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="1" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="2" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="3" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="4" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="5" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="6" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="7" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="8" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="9" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="10" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="11" value="0"></td>
+                    <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
+                    <td data-label="HEP-B"><input type="number" class="issue-input" data-col="1" value="0"></td>
+                    <td data-label="OPV"><input type="number" class="issue-input" data-col="2" value="0"></td>
+                    <td data-label="Penta"><input type="number" class="issue-input" data-col="3" value="0"></td>
+                    <td data-label="Panadol"><input type="number" class="issue-input" data-col="4" value="0"></td>
+                    <td data-label="PCV-13"><input type="number" class="issue-input" data-col="5" value="0"></td>
+                    <td data-label="Rota"><input type="number" class="issue-input" data-col="6" value="0"></td>
+                    <td data-label="IPV"><input type="number" class="issue-input" data-col="7" value="0"></td>
+                    <td data-label="MR"><input type="number" class="issue-input" data-col="8" value="0"></td>
+                    <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
+                    <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
+                    <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 2 -->
                 <tr>
                     <td class="row-title">IMRAN ABBASI</td>
-                    <td><input type="number" class="issue-input" data-col="0" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="1" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="2" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="3" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="4" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="5" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="6" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="7" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="8" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="9" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="10" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="11" value="0"></td>
+                    <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
+                    <td data-label="HEP-B"><input type="number" class="issue-input" data-col="1" value="0"></td>
+                    <td data-label="OPV"><input type="number" class="issue-input" data-col="2" value="0"></td>
+                    <td data-label="Penta"><input type="number" class="issue-input" data-col="3" value="0"></td>
+                    <td data-label="Panadol"><input type="number" class="issue-input" data-col="4" value="0"></td>
+                    <td data-label="PCV-13"><input type="number" class="issue-input" data-col="5" value="0"></td>
+                    <td data-label="Rota"><input type="number" class="issue-input" data-col="6" value="0"></td>
+                    <td data-label="IPV"><input type="number" class="issue-input" data-col="7" value="0"></td>
+                    <td data-label="MR"><input type="number" class="issue-input" data-col="8" value="0"></td>
+                    <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
+                    <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
+                    <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 3 -->
                 <tr>
                     <td class="row-title">AIJAZ HUSSAIN MEMON</td>
-                    <td><input type="number" class="issue-input" data-col="0" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="1" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="2" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="3" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="4" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="5" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="6" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="7" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="8" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="9" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="10" value="0"></td>
-                    <td><input type="number" class="issue-input" data-col="11" value="0"></td>
+                    <td data-label="BCG"><input type="number" class="issue-input" data-col="0" value="0"></td>
+                    <td data-label="HEP-B"><input type="number" class="issue-input" data-col="1" value="0"></td>
+                    <td data-label="OPV"><input type="number" class="issue-input" data-col="2" value="0"></td>
+                    <td data-label="Penta"><input type="number" class="issue-input" data-col="3" value="0"></td>
+                    <td data-label="Panadol"><input type="number" class="issue-input" data-col="4" value="0"></td>
+                    <td data-label="PCV-13"><input type="number" class="issue-input" data-col="5" value="0"></td>
+                    <td data-label="Rota"><input type="number" class="issue-input" data-col="6" value="0"></td>
+                    <td data-label="IPV"><input type="number" class="issue-input" data-col="7" value="0"></td>
+                    <td data-label="MR"><input type="number" class="issue-input" data-col="8" value="0"></td>
+                    <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
+                    <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
+                    <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
                 <!-- Remaining Balance Row -->
                 <tr class="remaining-row">
                     <td class="row-title">REMAINING BALANCE</td>
-                    <td><span class="remaining-val" data-col="0">0</span></td>
-                    <td><span class="remaining-val" data-col="1">0</span></td>
-                    <td><span class="remaining-val" data-col="2">0</span></td>
-                    <td><span class="remaining-val" data-col="3">0</span></td>
-                    <td><span class="remaining-val" data-col="4">0</span></td>
-                    <td><span class="remaining-val" data-col="5">0</span></td>
-                    <td><span class="remaining-val" data-col="6">0</span></td>
-                    <td><span class="remaining-val" data-col="7">0</span></td>
-                    <td><span class="remaining-val" data-col="8">0</span></td>
-                    <td><span class="remaining-val" data-col="9">0</span></td>
-                    <td><span class="remaining-val" data-col="10">0</span></td>
-                    <td><span class="remaining-val" data-col="11">0</span></td>
+                    <td data-label="BCG"><span class="remaining-val" data-col="0">0</span></td>
+                    <td data-label="HEP-B"><span class="remaining-val" data-col="1">0</span></td>
+                    <td data-label="OPV"><span class="remaining-val" data-col="2">0</span></td>
+                    <td data-label="Penta"><span class="remaining-val" data-col="3">0</span></td>
+                    <td data-label="Panadol"><span class="remaining-val" data-col="4">0</span></td>
+                    <td data-label="PCV-13"><span class="remaining-val" data-col="5">0</span></td>
+                    <td data-label="Rota"><span class="remaining-val" data-col="6">0</span></td>
+                    <td data-label="IPV"><span class="remaining-val" data-col="7">0</span></td>
+                    <td data-label="MR"><span class="remaining-val" data-col="8">0</span></td>
+                    <td data-label="TCV"><span class="remaining-val" data-col="9">0</span></td>
+                    <td data-label="TD"><span class="remaining-val" data-col="10">0</span></td>
+                    <td data-label="HPV"><span class="remaining-val" data-col="11">0</span></td>
                 </tr>
             </tbody>
         </table>
@@ -465,14 +536,18 @@
         document.getElementById('sheet-date').value = `${yyyy}-${mm}-${dd}`;
     }
 
-    // Clear data function
+    // Clear data & remove permanent LocalStorage
     function clearData() {
-        if (confirm("Kya aap waqai tamam values 0 karna chahte hain?")) {
+        if (confirm("Kya aap waqai tamam values reset karke data local storage se permanent delete karna chahte hain?")) {
             const allInputs = document.querySelectorAll('table input[type="number"]');
             allInputs.forEach(input => {
                 input.value = "0";
             });
-            saveData();
+            
+            // Delete from LocalStorage permanently
+            localStorage.removeItem(STORAGE_KEY);
+            
+            setDefaultDate();
             calculateTotals();
         }
     }
