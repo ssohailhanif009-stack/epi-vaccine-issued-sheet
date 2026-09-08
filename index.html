@@ -121,12 +121,19 @@
             border: 1px solid #bee3f8;
             border-radius: 6px 6px 0 0;
             margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .section-title {
             font-size: 13px;
             font-weight: 800;
             color: #2b6cb0;
+        }
+
+        .header-btn-group {
+            display: flex;
+            gap: 6px;
         }
 
         .table-wrapper {
@@ -201,6 +208,13 @@
             color: #22543d;
         }
 
+        .remaining-cell-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
         input[type="number"] {
             width: 100%;
             min-width: 45px;
@@ -219,6 +233,16 @@
             border-color: #3182ce;
             box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
             background-color: #fffaf0;
+        }
+
+        .custom-rem-input {
+            border-color: #38a169 !important;
+            background-color: #f0fff4 !important;
+        }
+
+        .custom-rem-input:focus {
+            border-color: #276749 !important;
+            box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.2) !important;
         }
 
         .remaining-val {
@@ -260,6 +284,16 @@
 
         .btn-section-clear:hover {
             background-color: #c05621;
+        }
+
+        .btn-custom-clear {
+            background-color: #319795;
+            color: white;
+            box-shadow: 0 2px 4px rgba(49, 151, 149, 0.2);
+        }
+
+        .btn-custom-clear:hover {
+            background-color: #2c7a7b;
         }
 
         .btn-clear {
@@ -372,6 +406,11 @@
                 text-align: right;
                 padding: 4px 8px;
             }
+
+            .remaining-cell-content {
+                flex-direction: row;
+                gap: 8px;
+            }
         }
     </style>
 </head>
@@ -397,7 +436,10 @@
     <!-- Header bar right above the stock section -->
     <div class="section-header-bar">
         <span class="section-title">📦 STOCK BOOK / REFRIGERATOR SECTION</span>
-        <button class="btn btn-section-clear" onclick="clearStockOnly()">🧹 Clear Stock Section</button>
+        <div class="header-btn-group">
+            <button class="btn btn-custom-clear" onclick="clearCustomRemainingOnly()">🔄 Reset Custom Balance</button>
+            <button class="btn btn-section-clear" onclick="clearStockOnly()">🧹 Clear Stock Section</button>
+        </div>
     </div>
 
     <div class="table-wrapper">
@@ -491,18 +533,78 @@
                 <!-- Remaining Balance Row -->
                 <tr class="remaining-row">
                     <td class="row-title">REMAINING BALANCE</td>
-                    <td data-label="BCG"><span class="remaining-val" data-col="0">0</span></td>
-                    <td data-label="HEP-B"><span class="remaining-val" data-col="1">0</span></td>
-                    <td data-label="OPV"><span class="remaining-val" data-col="2">0</span></td>
-                    <td data-label="Penta"><span class="remaining-val" data-col="3">0</span></td>
-                    <td data-label="Panadol"><span class="remaining-val" data-col="4">0</span></td>
-                    <td data-label="PCV-13"><span class="remaining-val" data-col="5">0</span></td>
-                    <td data-label="Rota"><span class="remaining-val" data-col="6">0</span></td>
-                    <td data-label="IPV"><span class="remaining-val" data-col="7">0</span></td>
-                    <td data-label="MR"><span class="remaining-val" data-col="8">0</span></td>
-                    <td data-label="TCV"><span class="remaining-val" data-col="9">0</span></td>
-                    <td data-label="TD"><span class="remaining-val" data-col="10">0</span></td>
-                    <td data-label="HPV"><span class="remaining-val" data-col="11">0</span></td>
+                    <td data-label="BCG">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="0">0</span>
+                            <input type="number" class="custom-rem-input" data-col="0" value="0">
+                        </div>
+                    </td>
+                    <td data-label="HEP-B">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="1">0</span>
+                            <input type="number" class="custom-rem-input" data-col="1" value="0">
+                        </div>
+                    </td>
+                    <td data-label="OPV">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="2">0</span>
+                            <input type="number" class="custom-rem-input" data-col="2" value="0">
+                        </div>
+                    </td>
+                    <td data-label="Penta">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="3">0</span>
+                            <input type="number" class="custom-rem-input" data-col="3" value="0">
+                        </div>
+                    </td>
+                    <td data-label="Panadol">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="4">0</span>
+                            <input type="number" class="custom-rem-input" data-col="4" value="0">
+                        </div>
+                    </td>
+                    <td data-label="PCV-13">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="5">0</span>
+                            <input type="number" class="custom-rem-input" data-col="5" value="0">
+                        </div>
+                    </td>
+                    <td data-label="Rota">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="6">0</span>
+                            <input type="number" class="custom-rem-input" data-col="6" value="0">
+                        </div>
+                    </td>
+                    <td data-label="IPV">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="7">0</span>
+                            <input type="number" class="custom-rem-input" data-col="7" value="0">
+                        </div>
+                    </td>
+                    <td data-label="MR">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="8">0</span>
+                            <input type="number" class="custom-rem-input" data-col="8" value="0">
+                        </div>
+                    </td>
+                    <td data-label="TCV">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="9">0</span>
+                            <input type="number" class="custom-rem-input" data-col="9" value="0">
+                        </div>
+                    </td>
+                    <td data-label="TD">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="10">0</span>
+                            <input type="number" class="custom-rem-input" data-col="10" value="0">
+                        </div>
+                    </td>
+                    <td data-label="HPV">
+                        <div class="remaining-cell-content">
+                            <span class="remaining-val" data-col="11">0</span>
+                            <input type="number" class="custom-rem-input" data-col="11" value="0">
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -616,6 +718,17 @@
         
         document.getElementById('sheet-date-picker').value = `${yyyy}-${mm}-${dd}`;
         document.getElementById('sheet-date-display').value = `${dd}-${mm}-${yyyy}`;
+    }
+
+    // Clear ONLY Custom Remaining Inputs
+    function clearCustomRemainingOnly() {
+        if (confirm("Kya aap sirf Remaining Balance ke custom inputs ko reset karna chahte hain?")) {
+            const customInputs = document.querySelectorAll('.custom-rem-input');
+            customInputs.forEach(input => {
+                input.value = "0";
+            });
+            saveData();
+        }
     }
 
     // Clear ONLY Stock Book / Refrigerator row values
