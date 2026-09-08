@@ -833,5 +833,16 @@
     });
 </script>
 
+<!-- Service Worker Registration For Offline Support -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(() => console.log('Offline mode ready!'))
+        .catch((err) => console.log('Service Worker error:', err));
+    });
+  }
+</script>
+
 </body>
 </html>
