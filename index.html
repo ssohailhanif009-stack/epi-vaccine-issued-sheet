@@ -131,7 +131,7 @@
             color: #2b6cb0;
         }
 
-        .header-btn-group {
+        .header-buttons {
             display: flex;
             gap: 6px;
         }
@@ -199,20 +199,33 @@
         }
 
         tbody tr.remaining-row {
-            background-color: #f0fff4;
+            background-color: #e6fffa;
             font-weight: bold;
         }
 
         tbody tr.remaining-row td.row-title {
-            background-color: #c6f6d5;
-            color: #22543d;
+            background-color: #b2f5ea;
+            color: #234e52;
         }
 
-        .remaining-cell-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+        tbody tr.adjust-row {
+            background-color: #fffaf0;
+        }
+
+        tbody tr.adjust-row td.row-title {
+            background-color: #feebc8;
+            color: #744210;
+        }
+
+        /* Box styling for Balance section */
+        .balance-box {
+            display: inline-block;
+            width: 100%;
+            padding: 4px 0;
+            background: #ffffff;
+            border: 1px solid #319795;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
         }
 
         input[type="number"] {
@@ -233,16 +246,6 @@
             border-color: #3182ce;
             box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
             background-color: #fffaf0;
-        }
-
-        .custom-rem-input {
-            border-color: #38a169 !important;
-            background-color: #f0fff4 !important;
-        }
-
-        .custom-rem-input:focus {
-            border-color: #276749 !important;
-            box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.2) !important;
         }
 
         .remaining-val {
@@ -286,14 +289,14 @@
             background-color: #c05621;
         }
 
-        .btn-custom-clear {
-            background-color: #319795;
+        .btn-adjust-reset {
+            background-color: #d69e2e;
             color: white;
-            box-shadow: 0 2px 4px rgba(49, 151, 149, 0.2);
+            box-shadow: 0 2px 4px rgba(214, 158, 46, 0.2);
         }
 
-        .btn-custom-clear:hover {
-            background-color: #2c7a7b;
+        .btn-adjust-reset:hover {
+            background-color: #b7791f;
         }
 
         .btn-clear {
@@ -407,9 +410,10 @@
                 padding: 4px 8px;
             }
 
-            .remaining-cell-content {
-                flex-direction: row;
-                gap: 8px;
+            .balance-box {
+                width: auto;
+                min-width: 90px;
+                text-align: center;
             }
         }
     </style>
@@ -436,8 +440,8 @@
     <!-- Header bar right above the stock section -->
     <div class="section-header-bar">
         <span class="section-title">📦 STOCK BOOK / REFRIGERATOR SECTION</span>
-        <div class="header-btn-group">
-            <button class="btn btn-custom-clear" onclick="clearCustomRemainingOnly()">🔄 Reset Custom Balance</button>
+        <div class="header-buttons">
+            <button class="btn btn-adjust-reset" onclick="resetAdjustOnly()">🔄 Reset Adjust</button>
             <button class="btn btn-section-clear" onclick="clearStockOnly()">🧹 Clear Stock Section</button>
         </div>
     </div>
@@ -530,81 +534,38 @@
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
                 </tr>
 
-                <!-- Remaining Balance Row -->
+                <!-- Remaining Balance Row (Boxed Values) -->
                 <tr class="remaining-row">
-                    <td class="row-title">REMAINING BALANCE</td>
-                    <td data-label="BCG">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="0">0</span>
-                            <input type="number" class="custom-rem-input" data-col="0" value="0">
-                        </div>
-                    </td>
-                    <td data-label="HEP-B">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="1">0</span>
-                            <input type="number" class="custom-rem-input" data-col="1" value="0">
-                        </div>
-                    </td>
-                    <td data-label="OPV">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="2">0</span>
-                            <input type="number" class="custom-rem-input" data-col="2" value="0">
-                        </div>
-                    </td>
-                    <td data-label="Penta">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="3">0</span>
-                            <input type="number" class="custom-rem-input" data-col="3" value="0">
-                        </div>
-                    </td>
-                    <td data-label="Panadol">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="4">0</span>
-                            <input type="number" class="custom-rem-input" data-col="4" value="0">
-                        </div>
-                    </td>
-                    <td data-label="PCV-13">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="5">0</span>
-                            <input type="number" class="custom-rem-input" data-col="5" value="0">
-                        </div>
-                    </td>
-                    <td data-label="Rota">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="6">0</span>
-                            <input type="number" class="custom-rem-input" data-col="6" value="0">
-                        </div>
-                    </td>
-                    <td data-label="IPV">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="7">0</span>
-                            <input type="number" class="custom-rem-input" data-col="7" value="0">
-                        </div>
-                    </td>
-                    <td data-label="MR">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="8">0</span>
-                            <input type="number" class="custom-rem-input" data-col="8" value="0">
-                        </div>
-                    </td>
-                    <td data-label="TCV">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="9">0</span>
-                            <input type="number" class="custom-rem-input" data-col="9" value="0">
-                        </div>
-                    </td>
-                    <td data-label="TD">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="10">0</span>
-                            <input type="number" class="custom-rem-input" data-col="10" value="0">
-                        </div>
-                    </td>
-                    <td data-label="HPV">
-                        <div class="remaining-cell-content">
-                            <span class="remaining-val" data-col="11">0</span>
-                            <input type="number" class="custom-rem-input" data-col="11" value="0">
-                        </div>
-                    </td>
+                    <td class="row-title">BALANCE</td>
+                    <td data-label="BCG"><div class="balance-box"><span class="remaining-val" data-col="0">0</span></div></td>
+                    <td data-label="HEP-B"><div class="balance-box"><span class="remaining-val" data-col="1">0</span></div></td>
+                    <td data-label="OPV"><div class="balance-box"><span class="remaining-val" data-col="2">0</span></div></td>
+                    <td data-label="Penta"><div class="balance-box"><span class="remaining-val" data-col="3">0</span></div></td>
+                    <td data-label="Panadol"><div class="balance-box"><span class="remaining-val" data-col="4">0</span></div></td>
+                    <td data-label="PCV-13"><div class="balance-box"><span class="remaining-val" data-col="5">0</span></div></td>
+                    <td data-label="Rota"><div class="balance-box"><span class="remaining-val" data-col="6">0</span></div></td>
+                    <td data-label="IPV"><div class="balance-box"><span class="remaining-val" data-col="7">0</span></div></td>
+                    <td data-label="MR"><div class="balance-box"><span class="remaining-val" data-col="8">0</span></div></td>
+                    <td data-label="TCV"><div class="balance-box"><span class="remaining-val" data-col="9">0</span></div></td>
+                    <td data-label="TD"><div class="balance-box"><span class="remaining-val" data-col="10">0</span></div></td>
+                    <td data-label="HPV"><div class="balance-box"><span class="remaining-val" data-col="11">0</span></div></td>
+                </tr>
+
+                <!-- Manual Adjust Row -->
+                <tr class="adjust-row">
+                    <td class="row-title">ADJUST</td>
+                    <td data-label="BCG"><input type="number" class="adjust-input" data-col="0" value="0"></td>
+                    <td data-label="HEP-B"><input type="number" class="adjust-input" data-col="1" value="0"></td>
+                    <td data-label="OPV"><input type="number" class="adjust-input" data-col="2" value="0"></td>
+                    <td data-label="Penta"><input type="number" class="adjust-input" data-col="3" value="0"></td>
+                    <td data-label="Panadol"><input type="number" class="adjust-input" data-col="4" value="0"></td>
+                    <td data-label="PCV-13"><input type="number" class="adjust-input" data-col="5" value="0"></td>
+                    <td data-label="Rota"><input type="number" class="adjust-input" data-col="6" value="0"></td>
+                    <td data-label="IPV"><input type="number" class="adjust-input" data-col="7" value="0"></td>
+                    <td data-label="MR"><input type="number" class="adjust-input" data-col="8" value="0"></td>
+                    <td data-label="TCV"><input type="number" class="adjust-input" data-col="9" value="0"></td>
+                    <td data-label="TD"><input type="number" class="adjust-input" data-col="10" value="0"></td>
+                    <td data-label="HPV"><input type="number" class="adjust-input" data-col="11" value="0"></td>
                 </tr>
             </tbody>
         </table>
@@ -720,11 +681,11 @@
         document.getElementById('sheet-date-display').value = `${dd}-${mm}-${yyyy}`;
     }
 
-    // Clear ONLY Custom Remaining Inputs
-    function clearCustomRemainingOnly() {
-        if (confirm("Kya aap sirf Remaining Balance ke custom inputs ko reset karna chahte hain?")) {
-            const customInputs = document.querySelectorAll('.custom-rem-input');
-            customInputs.forEach(input => {
+    // Clear ONLY Adjust Row Values
+    function resetAdjustOnly() {
+        if (confirm("Kya aap tamam Adjust columns ki values reset karna chahte hain?")) {
+            const adjustInputs = document.querySelectorAll('.adjust-input');
+            adjustInputs.forEach(input => {
                 input.value = "0";
             });
             saveData();
