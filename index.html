@@ -112,44 +112,21 @@
             cursor: pointer;
         }
 
-        /* Stock Section Header Bar & Button */
-        .stock-header-bar {
+        .section-header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #ebf8ff;
-            border: 1px solid #bee3f8;
-            border-left: 4px solid #3182ce;
             padding: 8px 12px;
+            border: 1px solid #bee3f8;
             border-radius: 6px 6px 0 0;
-            margin-bottom: -1px;
+            margin-top: 10px;
         }
 
-        .stock-header-bar span {
+        .section-title {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: #2b6cb0;
-            text-transform: uppercase;
-        }
-
-        .btn-stock-clear {
-            background-color: #dd6b20;
-            color: white;
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: 700;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 2px 4px rgba(221, 107, 32, 0.2);
-        }
-
-        .btn-stock-clear:hover {
-            background-color: #c05621;
         }
 
         .table-wrapper {
@@ -165,7 +142,7 @@
             border-collapse: collapse;
             text-align: center;
             font-size: 12px;
-            min-width: 1200px;
+            min-width: 900px;
         }
 
         th, td {
@@ -261,10 +238,9 @@
         }
 
         .btn {
-            width: 100%;
-            max-width: 200px;
-            padding: 10px 18px;
-            font-size: 13px;
+            width: auto;
+            padding: 6px 12px;
+            font-size: 12px;
             font-weight: 700;
             border: none;
             border-radius: 6px;
@@ -273,10 +249,24 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
+        }
+
+        .btn-section-clear {
+            background-color: #dd6b20;
+            color: white;
+            box-shadow: 0 2px 4px rgba(221, 107, 32, 0.2);
+        }
+
+        .btn-section-clear:hover {
+            background-color: #c05621;
         }
 
         .btn-clear {
+            width: 100%;
+            max-width: 200px;
+            padding: 10px 18px;
+            font-size: 13px;
             background-color: #e53e3e;
             color: white;
             box-shadow: 0 2px 4px rgba(229, 62, 62, 0.2);
@@ -309,7 +299,7 @@
             .action-bar {
                 justify-content: center;
             }
-            .btn {
+            .btn-clear {
                 max-width: 100%;
             }
 
@@ -318,7 +308,6 @@
                 border: none;
                 box-shadow: none;
                 overflow-x: visible;
-                border-radius: 8px;
             }
 
             table, thead, tbody, th, td, tr {
@@ -405,10 +394,10 @@
         </div>
     </div>
 
-    <!-- Stock Section Top Bar with Clear Button -->
-    <div class="stock-header-bar">
-        <span>📦 Stock / Refrigerator Section</span>
-        <button class="btn-stock-clear" onclick="clearStockData()">🗑️ Clear Stock Only</button>
+    <!-- Header bar right above the stock section -->
+    <div class="section-header-bar">
+        <span class="section-title">📦 STOCK BOOK / REFRIGERATOR SECTION</span>
+        <button class="btn btn-section-clear" onclick="clearStockOnly()">🧹 Clear Stock Section</button>
     </div>
 
     <div class="table-wrapper">
@@ -428,11 +417,6 @@
                     <th>TCV</th>
                     <th>TD</th>
                     <th>HPV</th>
-                    <th>0.05 ml</th>
-                    <th>0.5 ml</th>
-                    <th>5ml</th>
-                    <th>QR-Code</th>
-                    <th>Vaccination Card</th>
                 </tr>
             </thead>
             <tbody>
@@ -451,11 +435,6 @@
                     <td data-label="TCV"><input type="number" class="stock-input" data-col="9" value="0"></td>
                     <td data-label="TD"><input type="number" class="stock-input" data-col="10" value="0"></td>
                     <td data-label="HPV"><input type="number" class="stock-input" data-col="11" value="0"></td>
-                    <td data-label="0.05 ml"><input type="number" class="stock-input" data-col="12" value="0"></td>
-                    <td data-label="0.5 ml"><input type="number" class="stock-input" data-col="13" value="0"></td>
-                    <td data-label="5ml"><input type="number" class="stock-input" data-col="14" value="0"></td>
-                    <td data-label="QR-Code"><input type="number" class="stock-input" data-col="15" value="0"></td>
-                    <td data-label="Vaccination Card"><input type="number" class="stock-input" data-col="16" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 1 -->
@@ -473,11 +452,6 @@
                     <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
                     <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
-                    <td data-label="0.05 ml"><input type="number" class="issue-input" data-col="12" value="0"></td>
-                    <td data-label="0.5 ml"><input type="number" class="issue-input" data-col="13" value="0"></td>
-                    <td data-label="5ml"><input type="number" class="issue-input" data-col="14" value="0"></td>
-                    <td data-label="QR-Code"><input type="number" class="issue-input" data-col="15" value="0"></td>
-                    <td data-label="Vaccination Card"><input type="number" class="issue-input" data-col="16" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 2 -->
@@ -495,11 +469,6 @@
                     <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
                     <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
-                    <td data-label="0.05 ml"><input type="number" class="issue-input" data-col="12" value="0"></td>
-                    <td data-label="0.5 ml"><input type="number" class="issue-input" data-col="13" value="0"></td>
-                    <td data-label="5ml"><input type="number" class="issue-input" data-col="14" value="0"></td>
-                    <td data-label="QR-Code"><input type="number" class="issue-input" data-col="15" value="0"></td>
-                    <td data-label="Vaccination Card"><input type="number" class="issue-input" data-col="16" value="0"></td>
                 </tr>
 
                 <!-- Issue Row 3 -->
@@ -517,11 +486,6 @@
                     <td data-label="TCV"><input type="number" class="issue-input" data-col="9" value="0"></td>
                     <td data-label="TD"><input type="number" class="issue-input" data-col="10" value="0"></td>
                     <td data-label="HPV"><input type="number" class="issue-input" data-col="11" value="0"></td>
-                    <td data-label="0.05 ml"><input type="number" class="issue-input" data-col="12" value="0"></td>
-                    <td data-label="0.5 ml"><input type="number" class="issue-input" data-col="13" value="0"></td>
-                    <td data-label="5ml"><input type="number" class="issue-input" data-col="14" value="0"></td>
-                    <td data-label="QR-Code"><input type="number" class="issue-input" data-col="15" value="0"></td>
-                    <td data-label="Vaccination Card"><input type="number" class="issue-input" data-col="16" value="0"></td>
                 </tr>
 
                 <!-- Remaining Balance Row -->
@@ -539,11 +503,6 @@
                     <td data-label="TCV"><span class="remaining-val" data-col="9">0</span></td>
                     <td data-label="TD"><span class="remaining-val" data-col="10">0</span></td>
                     <td data-label="HPV"><span class="remaining-val" data-col="11">0</span></td>
-                    <td data-label="0.05 ml"><span class="remaining-val" data-col="12">0</span></td>
-                    <td data-label="0.5 ml"><span class="remaining-val" data-col="13">0</span></td>
-                    <td data-label="5ml"><span class="remaining-val" data-col="14">0</span></td>
-                    <td data-label="QR-Code"><span class="remaining-val" data-col="15">0</span></td>
-                    <td data-label="Vaccination Card"><span class="remaining-val" data-col="16">0</span></td>
                 </tr>
             </tbody>
         </table>
@@ -556,7 +515,6 @@
 
 <script>
     const STORAGE_KEY = 'epi_vaccine_sheet_data';
-    const TOTAL_COLUMNS = 17; // Total number of antigens/items
 
     // Helper: Convert YYYY-MM-DD to DD-MM-YYYY
     function formatToDDMMYYYY(yyyyMmDd) {
@@ -580,12 +538,10 @@
 
     // Calculate remaining balance for all columns
     function calculateTotals() {
-        for (let col = 0; col < TOTAL_COLUMNS; col++) {
+        for (let col = 0; col < 12; col++) {
             const stockInput = document.querySelector(`.stock-input[data-col="${col}"]`);
             const issueInputs = document.querySelectorAll(`.issue-input[data-col="${col}"]`);
             const remainingSpan = document.querySelector(`.remaining-val[data-col="${col}"]`);
-
-            if (!stockInput || !remainingSpan) continue;
 
             let stockVal = parseFloat(stockInput.value) || 0;
             let totalIssued = 0;
@@ -662,9 +618,9 @@
         document.getElementById('sheet-date-display').value = `${dd}-${mm}-${yyyy}`;
     }
 
-    // Clear ONLY Stock Book / Refrigerator section
-    function clearStockData() {
-        if (confirm("Kya aap waqai sirf Stock Book / Refrigerator section ka data reset karna chahte hain?")) {
+    // Clear ONLY Stock Book / Refrigerator row values
+    function clearStockOnly() {
+        if (confirm("Kya aap sirf Stock Book / Refrigerator section ka data clear karna chahte hain?")) {
             const stockInputs = document.querySelectorAll('.stock-input');
             stockInputs.forEach(input => {
                 input.value = "0";
