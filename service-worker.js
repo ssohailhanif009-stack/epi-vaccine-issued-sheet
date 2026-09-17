@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portal-offline-v4';
+const CACHE_NAME = 'portal-offline-v5';
 const assetsToCache = [
   './',
   './index.html',
@@ -9,18 +9,19 @@ const assetsToCache = [
   './manifest.json'
 ];
 
-// Install Service Worker and Cache Core Assets Immediately
+// Install Service Worker and Force Cache All Core Assets Immediately
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
+        console.log('Opened cache and caching all assets');
         return cache.addAll(assetsToCache);
       })
   );
-  self.skipWaiting();
+  self.skipWaiting(); // Fauran active karay taaki wait na karna paray
 });
 
-// Activate and Clean Old Caches Instantly
+// Activate and Clean Old Caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -35,31 +36,30 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Files: Stale-While-Revalidate / Cache First for Instant Offline Access
+// Fetch Strategy: Network First with Instant Fallback to Cache
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Agar cache mein mojood hai toh foran wahi se de do (bina internet ke bhi)
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      
-      // Warna network se fetch karo
-      return fetch(event.request)
-        .then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-        .catch(() => {
-          // Agar net bhi nahi hai aur file cache mein bhi nahi, toh fallback ke tor par index.html dikhao
+    fetch(event.request)
+      .then((networkResponse) => {
+        // Agar net chal raha hai toh naya version cache mein save kar lo
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // Agar internet nahi hai, toh foran cache se utha kar de do (Offline Mode)
+        return caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // Agar file cache mein bhi na mile aur net bhi na ho, toh index.html dikhao
           if (event.request.headers.get('accept').includes('text/html')) {
             return caches.match('./index.html');
           }
         });
-    })
+      })
   );
 });
