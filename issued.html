@@ -817,13 +817,17 @@
     });
 </script>
 
-<!-- Service Worker Registration For Offline Support -->
+<!-- Naya Service Worker Register Karne Ka Code -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./service-worker.js')
-        .then(() => console.log('Offline mode ready!'))
-        .catch((err) => console.log('Service Worker error:', err));
+        .then((registration) => {
+          console.log('ServiceWorker registered successfully with scope: ', registration.scope);
+        })
+        .catch((error) => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
     });
   }
 </script>
