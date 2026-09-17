@@ -1,11 +1,10 @@
-const CACHE_NAME = 'portal-offline-v1';
+const CACHE_NAME = 'portal-offline-v2';
 const assetsToCache = [
   './',
   './index.html',
   './issued.html',
   './waste.html',
   './consume.html'
-  // Agar aapke paas koi CSS, JS ya images hain, toh unke paths bhi yahan add kar sakte hain
 ];
 
 // Install Service Worker and Cache Files
@@ -13,10 +12,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Opened cache');
+        console.log('Opened cache v2');
         return cache.addAll(assetsToCache);
       })
   );
+  self.skipWaiting();
 });
 
 // Fetch Files from Cache when Offline
@@ -24,7 +24,6 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Cache mil jaye toh wohi return karo, warna internet se fetch karo
         if (response) {
           return response;
         }
@@ -45,6 +44,6 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
