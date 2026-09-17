@@ -1,44 +1,50 @@
-const CACHE_NAME = 'offline-portal-v1';
-// Un sabhi files ke naam likhein jo offline chahiye
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'portal-offline-v1';
+const assetsToCache = [
   './',
   './index.html',
-  './manifest.json',
-  // Agar koi CSS, JS ya Logo images hain to unka path bhi yahan add karein:
-  // './style.css',
-  // './script.js',
-  // './logo.png'
+  './issued.html',
+  './waste.html',
+  './consume.html'
+  // Agar aapke paas koi CSS, JS ya images hain, toh unke paths bhi yahan add kar sakte hain
 ];
 
-// App install hote hi files cache (save) ho jayengi
+// Install Service Worker and Cache Files
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('Opened cache');
+        return cache.addAll(assetsToCache);
+      })
   );
 });
 
-// Cache ko update rakhne ke liye
+// Fetch Files from Cache when Offline
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        // Cache mil jaye toh wohi return karo, warna internet se fetch karo
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
+  );
+});
+
+// Activate and Clean Old Caches
 self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((keys) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
           }
         })
       );
-    })
-  );
-});
-
-// Jab internet na ho to saved files se load kare
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
     })
   );
 });
