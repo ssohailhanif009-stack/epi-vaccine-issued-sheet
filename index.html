@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index.html</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 86, 179, 0.6)), 
+                        url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.96);
+            width: 100%;
+            max-width: 480px;
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Chota aur Perfect Square Logo Styling */
+        .logo-container {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.2);
+            border: 2px solid #0056b3;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px; /* Logo ke sath padding taake border se chipke nahi */
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            display: block;
+        }
+
+        /* Headings Styling */
+        .heading-box {
+            margin-bottom: 28px;
+        }
+
+        .main-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0056b3;
+            text-align: center;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Modern & Attractive Buttons Styling */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #0056b3, #003d82);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 12px rgba(0, 86, 179, 0.3);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #004085, #002b5c);
+            box-shadow: 0 8px 18px rgba(0, 86, 179, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 8px rgba(0, 86, 179, 0.3);
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 22px 18px;
+            }
+            .logo-container {
+                width: 75px;
+                height: 75px;
+            }
+            .main-title {
+                font-size: 17px;
+            }
+            .sub-title {
+                font-size: 13px;
+            }
+            .btn {
+                padding: 13px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Image (Ensure your logo image file is named logo.png in the same folder) -->
+        <div class="logo-container">
+            <img src="logo.png" alt="EPI Logo">
+        </div>
+
+        <!-- Headings -->
+        <div class="heading-box">
+            <h1 class="main-title">EPI VACCINATION CALCULATIVE DATA FORMAT</h1>
+            <h2 class="sub-title">EPI VACCINATION CENTER CIVIL HOSPITAL NAUSHAHRO FEROZE</h2>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <a href="issued.html" class="btn">ISSUED VACCINE</a>
+            <a href="consume.html" class="btn">VACCINE CONSUMPTION</a>
+            <a href="waste.html" class="btn">WASTE MANAGEMENT</a>
+        </div>
+    </div>
+
+    <!-- Service Worker Registration Script -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then((registration) => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+
+</body>
+</html>
