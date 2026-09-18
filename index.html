@@ -96,7 +96,7 @@
             gap: 14px;
         }
 
-.btn {
+        .btn {
             display: block;
             width: 100%;
             padding: 15px 20px;
@@ -168,21 +168,6 @@
             <a href="waste.html" class="btn">WASTE MANAGEMENT</a>
         </div>
     </div>
-
-    <!-- Service Worker Registration Script -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
-                    .then((registration) => {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch((error) => {
-                        console.log('ServiceWorker registration failed: ', error);
-                    });
-            });
-        }
-    </script>
 
 </body>
 </html>
