@@ -291,17 +291,14 @@
         return `${yyyy}-${mm}-${dd}`;
     }
 
-    // YYYY-MM-DD ko DD-MM-YYYY mein convert karne ke liye
     function formatDateToDDMMYYYY(dateStr) {
         if (!dateStr) return '';
         if (dateStr.includes('-')) {
             const parts = dateStr.split('-');
             if (parts.length === 3) {
-                // Agar pehle se YYYY-MM-DD hai
                 if (parts[0].length === 4) {
                     return `${parts[2]}-${parts[1]}-${parts[0]}`;
                 }
-                // Agar pehle se DD-MM-YYYY hai
                 if (parts[2].length === 4) {
                     return dateStr;
                 }
@@ -310,17 +307,14 @@
         return dateStr;
     }
 
-    // DD-MM-YYYY ko YYYY-MM-DD mein convert karne ke liye (input value ya storage ke liye)
     function formatDateToYYYYMMDD(dateStr) {
         if (!dateStr) return '';
         if (dateStr.includes('-')) {
             const parts = dateStr.split('-');
             if (parts.length === 3) {
-                // Agar DD-MM-YYYY hai
                 if (parts[0].length === 2 && parts[2].length === 4) {
                     return `${parts[2]}-${parts[1]}-${parts[0]}`;
                 }
-                // Agar YYYY-MM-DD hai
                 if (parts[0].length === 4) {
                     return dateStr;
                 }
@@ -333,7 +327,6 @@
         const tr = document.createElement('tr');
         tr.className = 'data-row';
 
-        // Ensure date format for calendar and display
         const standardYYYYMMDD = formatDateToYYYYMMDD(dateVal) || getTodayYYYYMMDD();
         const displayDDMMYYYY = formatDateToDDMMYYYY(standardYYYYMMDD);
 
@@ -385,7 +378,6 @@
         const hiddenPicker = tr.querySelector('.hidden-date-picker');
         const displayInput = tr.querySelector('.date-display-input');
 
-        // Jab calendar se date select ho
         hiddenPicker.addEventListener('change', function() {
             if (this.value) {
                 displayInput.value = formatDateToDDMMYYYY(this.value);
@@ -394,7 +386,6 @@
             }
         });
 
-        // Numeric aur text inputs par event listener
         const inputs = tr.querySelectorAll('.consume-input');
         inputs.forEach(input => {
             input.addEventListener('input', () => {
@@ -436,7 +427,7 @@
 
         rows.forEach(row => {
             const hiddenPicker = row.querySelector('.hidden-date-picker');
-            const dateVal = hiddenPicker.value; // Store as YYYY-MM-DD backend-wise for safe sorting/loading
+            const dateVal = hiddenPicker.value;
             const rowValues = [];
             row.querySelectorAll('.consume-input').forEach(input => {
                 rowValues.push(input.value);
@@ -462,28 +453,12 @@
                 console.error("Error loading data:", e);
             }
         }
-        // Default with 1 row if empty
         addNewRow(getTodayYYYYMMDD());
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         loadData();
     });
-</script>
-
-<!-- Service Worker Registration -->
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js')
-                .then((registration) => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch((error) => {
-                    console.log('ServiceWorker registration failed: ', error);
-                });
-        });
-    }
 </script>
 
 </body>
