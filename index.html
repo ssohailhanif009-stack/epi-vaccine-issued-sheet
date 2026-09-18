@@ -40,7 +40,6 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Chota aur Perfect Square Logo Styling */
         .logo-container {
             width: 85px;
             height: 85px;
@@ -63,7 +62,6 @@
             display: block;
         }
 
-        /* Headings Styling */
         .heading-box {
             margin-bottom: 28px;
         }
@@ -89,7 +87,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Modern & Attractive Buttons Styling */
         .button-group {
             display: flex;
             flex-direction: column;
@@ -125,7 +122,6 @@
             box-shadow: 0 3px 8px rgba(0, 86, 179, 0.3);
         }
 
-        /* Mobile Responsive Adjustments */
         @media (max-width: 480px) {
             .container {
                 padding: 22px 18px;
@@ -150,18 +146,15 @@
 <body>
 
     <div class="container">
-        <!-- Logo Image -->
         <div class="logo-container">
             <img src="epi.png" alt="EPI Logo">
         </div>
 
-        <!-- Headings -->
         <div class="heading-box">
             <h1 class="main-title">EPI VACCINATION CALCULATIVE DATA FORMAT</h1>
             <h2 class="sub-title">EPI VACCINATION CENTER CIVIL HOSPITAL NAUSHAHRO FEROZE</h2>
         </div>
 
-        <!-- Buttons -->
         <div class="button-group">
             <a href="issued.html" class="btn">ISSUED VACCINE</a>
             <a href="consume.html" class="btn">VACCINE CONSUMPTION</a>
@@ -169,5 +162,19 @@
         </div>
     </div>
 
+    <!-- Service Worker Registration Script -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then((reg) => {
+                        console.log('Service Worker registered successfully:', reg.scope);
+                    })
+                    .catch((err) => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
