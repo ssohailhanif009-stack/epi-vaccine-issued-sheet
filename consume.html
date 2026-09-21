@@ -283,14 +283,6 @@
 <script>
     const STORAGE_KEY = 'epi_consume_multi_rows_data_calendar';
 
-    function getTodayYYYYMMDD() {
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        return `${yyyy}-${mm}-${dd}`;
-    }
-
     function formatDateToDDMMYYYY(dateStr) {
         if (!dateStr) return '';
         if (dateStr.includes('-')) {
@@ -327,12 +319,12 @@
         const tr = document.createElement('tr');
         tr.className = 'data-row';
 
-        const standardYYYYMMDD = formatDateToYYYYMMDD(dateVal) || getTodayYYYYMMDD();
-        const displayDDMMYYYY = formatDateToDDMMYYYY(standardYYYYMMDD);
+        const standardYYYYMMDD = formatDateToYYYYMMDD(dateVal);
+        const displayDDMMYYYY = standardYYYYMMDD ? formatDateToDDMMYYYY(standardYYYYMMDD) : '';
 
         let html = `<td class="row-date">
             <div class="date-display-wrapper">
-                <input type="text" class="date-display-input" value="${displayDDMMYYYY}" readonly>
+                <input type="text" class="date-display-input" value="${displayDDMMYYYY}" placeholder="Select Date" readonly>
                 <input type="date" class="hidden-date-picker" value="${standardYYYYMMDD}">
             </div>
         </td>`;
@@ -453,7 +445,7 @@
                 console.error("Error loading data:", e);
             }
         }
-        addNewRow(getTodayYYYYMMDD());
+        addNewRow('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
